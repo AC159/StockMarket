@@ -1,0 +1,47 @@
+<!-- Creating navigation bar -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">StocksOnly</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbarContent">
+
+        <ul class="navbar-nav ">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'stock_market:home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+
+        </ul>
+
+        <form class="form-inline mx-auto my-2 my-lg-0" name="stock_ticker_form" action ="" method="post">
+            {% csrf_token %}
+
+            {% load widget_tweaks %}
+
+            {% render_field form.ticker class+="form-control mr-sm-2" type="search" placeholder="Search Stock Symbol" aria-label="Search" %}
+
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+        </form>
+
+
+        <button class="btn btn-outline-primary mx-1 my-2 my-sm-0" type="button">Login</button>
+       <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Sign Up
+        </button>
+
+    </div>
+
+</nav>
+
+
+{% include "Stocks/SignUpModal.html" %}

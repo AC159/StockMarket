@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Including bootstrap -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+    <title>{{ ticker }}</title>
+
+</head>
+<body>
+
+{% include "./navbar.html" %}
+
+
+<div class="container-md col-8 tab">
+
+    <button class="tablinks" id="Summary_button" onclick="openTab(this.id, 'Summary_content')">Summary</button>
+    <button class="tablinks" id="Charts_button" onclick="openTab(this.id, 'Charts_content')">Charts</button>
+
+</div> <!--End of container -->
+
+
+<!-- 'Summary' tab -->
+<div class="container-md col-8 tabcontent" id="Summary_content">
+{% load humanize %}
+
+    <h5>{{ company_profile.name }} -- {{ ticker }} ({{ company_profile.exchange }})</h5>
+    <p><small>Currency: {{ company_profile.currency }} -- Country: {{ company_profile.country }} -- Industry: {{ company_profile.finnhub_industry }}</small></p>
+
+    <h2>{{ quote.c|intcomma }}</h2>
+
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Stock</th>
+      <th scope="col">Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Previous close: {{ quote.pc|intcomma }}</td>
+      <td>Market Cap (in millions):  {{ company_profile.market_capitalization|intcomma }}</td>
+    </tr>
+    <tr>
+      <td>Open: {{ quote.o|intcomma }}</td>
+      <td>Outstanding shares (in millions):  {{ company_profile.share_outstanding|intcomma }}</td>
+    </tr>
+    <tr>
+      <td>High: {{ quote.h|intcomma }}</td>
+      <td>10 Day avg trading volume (in millions): {{ basic_financials.metric.10DayAverageTradingVolume|intcomma }}</td>
+    </tr>
+    <tr>
+      <td>Low: {{ quote.l|intcomma }}</td>
+      <td>52 week high: {{ basic_financials.metric.52WeekHigh|intcomma }}</td>
+    </tr>
+    <tr>
+      <td>3 month avg trading volume (in millions): {{ basic_financials.metric.3MonthAverageTradingVolume|intcomma }}</td>
+      <td>52 week low: {{ basic_financials.metric.52WeekLow|intcomma }}</td>
+    </tr>
+    <tr>
+      <td>13 week price return daily: {{ basic_financials.metric.13WeekPriceReturnDaily|intcomma }}</td>
+      <td>URL: <a href="{{ company_profile.weburl }}" target="_blank">{{ company_profile.weburl }}</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!--Company News -->
+
+{% for news in company_news %}
+
+<div class="card mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{% if news.image %}
+        {{ news.image }} {% else %} {{ company_profile.logo  }} {% endif %}" class="card-img" alt="">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><a href="{{ news.url }}" target="_blank">{{ news.headline | safe }}</a></h5>
+        <p class="card-text">{{ news.summary|truncatewords:100 }}</p>
+        <p class="card-text"><small class="text-muted">Date published: {{ news.datetime }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+</div> <!-- End of 'Summary' tab -->
+
+
+
+<!-- 'Chart' tab -->
+<div class="container-md col-8 tabcontent" id="Charts_content">
+
+
+</div>
+
+<!-- End of 'Chart' tab -->
+
+{% load static %}
+    <link rel="stylesheet" href="{% static "stocks/StockView.css" %}">
+    <script src="{% static "stocks/StockViewTabs.js" %}"></script>
+
+<script>
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("Summary_button").click();
+</script>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+</body>
+</html>
