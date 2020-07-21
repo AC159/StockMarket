@@ -1,10 +1,4 @@
 .idea
-
-# Do not include python bytecode
 __pycache__
-
-# Do not include virtual environment
 venv
-
-# Do not include database
 db.sqlite3
