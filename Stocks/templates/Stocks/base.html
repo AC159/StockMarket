@@ -17,29 +17,29 @@
 
 {% include "./navbar.html" %}
 
-
+<div class="container-md col-8">
 <!-- 1st row of merger headlines -->
 <div class="card-deck">
   <div class="card">
-    <img src={{ merger_news.0.image }} class="card-img-top" alt="...">
+    <img src='{{ merger_news.0.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title"><a href={{ merger_news.0.url }} target="_blank">{{ merger_news.0.headline }}</a></h5>
+      <h5 class="card-title"><a href='{{ merger_news.0.url }}' target="_blank">{{ merger_news.0.headline }}</a></h5>
       <p class="card-text">{{ merger_news.0.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ merger_news.0.datetime }}</small></p>
     </div>
   </div>
   <div class="card">
-    <img src={{ merger_news.1.image }} class="card-img-top" alt="...">
+    <img src='{{ merger_news.1.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title"><a href={{ merger_news.1.url }} target="_blank">{{ merger_news.1.headline }}</a></h5>
+      <h5 class="card-title"><a href='{{ merger_news.1.url }}' target="_blank">{{ merger_news.1.headline }}</a></h5>
       <p class="card-text">{{ merger_news.1.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ merger_news.1.datetime }}</small></p>
     </div>
   </div>
   <div class="card">
-    <img src={{ merger_news.2.image }} class="card-img-top" alt="...">
+    <img src='{{ merger_news.2.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-        <h5 class="card-title"><a href={{ merger_news.2.url }} target="_blank">{{ merger_news.2.headline }}</a></h5>
+        <h5 class="card-title"><a href='{{ merger_news.2.url }}' target="_blank">{{ merger_news.2.headline }}</a></h5>
       <p class="card-text">{{ merger_news.2.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ merger_news.2.datetime }}</small></p>
     </div>
@@ -50,25 +50,25 @@
 <!-- 1st row of crypto headlines -->
 <div class="card-deck">
   <div class="card">
-    <img src={{ crypto_news.0.image }} class="card-img-top" alt="...">
+    <img src='{{ crypto_news.0.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title"><a href={{ crypto_news.0.url }} target="_blank">{{ crypto_news.0.headline }}</a></h5>
+      <h5 class="card-title"><a href='{{ crypto_news.0.url }}' target="_blank">{{ crypto_news.0.headline }}</a></h5>
       <p class="card-text">{{ crypto_news.0.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ crypto_news.0.datetime }}</small></p>
     </div>
   </div>
   <div class="card">
-    <img src={{ crypto_news.3.image }} class="card-img-top" alt="...">
+    <img src='{{ crypto_news.3.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title"><a href={{ crypto_news.3.url }} target="_blank">{{ crypto_news.3.headline|safe }}</a></h5>
+      <h5 class="card-title"><a href='{{ crypto_news.3.url }}' target="_blank">{{ crypto_news.3.headline|safe }}</a></h5>
       <p class="card-text">{{ crypto_news.3.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ crypto_news.3.datetime }}</small></p>
     </div>
   </div>
   <div class="card">
-    <img src={{ crypto_news.2.image }} class="card-img-top" alt="...">
+    <img src='{{ crypto_news.2.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-        <h5 class="card-title"><a href={{ crypto_news.2.url }} target="_blank">{{ crypto_news.2.headline }}</a></h5>
+        <h5 class="card-title"><a href='{{ crypto_news.2.url }}' target="_blank">{{ crypto_news.2.headline }}</a></h5>
       <p class="card-text">{{ crypto_news.2.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ crypto_news.2.datetime }}</small></p>
     </div>
@@ -79,25 +79,25 @@
 <!-- 1st row of headlines -->
 <div class="card-deck">
   <div class="card">
-    <img src={{ general_news.0.image }} class="card-img-top" alt="...">
+    <img src='{{ general_news.0.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title"><a href={{ general_news.0.url }} target="_blank">{{ general_news.0.headline }}</a></h5>
+      <h5 class="card-title"><a href='{{ general_news.0.url }}' target="_blank">{{ general_news.0.headline }}</a></h5>
       <p class="card-text">{{ general_news.0.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ general_news.0.datetime }}</small></p>
     </div>
   </div>
   <div class="card">
-    <img src={{ general_news.1.image }} class="card-img-top" alt="...">
+    <img src='{{ general_news.1.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title"><a href={{ general_news.1.url }} target="_blank">{{ general_news.1.headline }}</a></h5>
+      <h5 class="card-title"><a href='{{ general_news.1.url }}' target="_blank">{{ general_news.1.headline }}</a></h5>
       <p class="card-text">{{ general_news.1.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ general_news.1.datetime }}</small></p>
     </div>
   </div>
   <div class="card">
-    <img src={{ general_news.2.image }} class="card-img-top" alt="...">
+    <img src='{{ general_news.2.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-        <h5 class="card-title"><a href={{ general_news.2.url }} target="_blank">{{ general_news.2.headline }}</a></h5>
+        <h5 class="card-title"><a href='{{ general_news.2.url }}' target="_blank">{{ general_news.2.headline }}</a></h5>
       <p class="card-text">{{ general_news.2.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ general_news.2.datetime }}</small></p>
     </div>
@@ -109,25 +109,25 @@
 
 <div class="card-deck">
   <div class="card">
-    <img src={{ general_news.3.image }} class="card-img-top" alt="...">
+    <img src='{{ general_news.3.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title"><a href={{ general_news.3.url }} target="_blank">{{ general_news.3.headline }}</a></h5>
+      <h5 class="card-title"><a href='{{ general_news.3.url }}' target="_blank">{{ general_news.3.headline }}</a></h5>
       <p class="card-text">{{ general_news.3.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ general_news.3.datetime }}</small></p>
     </div>
   </div>
   <div class="card">
-    <img src={{ general_news.4.image }} class="card-img-top" alt="...">
+    <img src='{{ general_news.4.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title"><a href={{ general_news.4.url }} target="_blank">{{ general_news.4.headline }}</a></h5>
+      <h5 class="card-title"><a href='{{ general_news.4.url }}' target="_blank">{{ general_news.4.headline }}</a></h5>
       <p class="card-text">{{ general_news.4.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ general_news.4.datetime }}</small></p>
     </div>
   </div>
   <div class="card">
-    <img src={{ general_news.5.image }} class="card-img-top" alt="...">
+    <img src='{{ general_news.5.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title"><a href={{ general_news.5.url }} target="_blank">{{ general_news.5.headline }}</a></h5>
+      <h5 class="card-title"><a href='{{ general_news.5.url }}' target="_blank">{{ general_news.5.headline }}</a></h5>
       <p class="card-text">{{ general_news.5.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ general_news.5.datetime }}</small></p>
     </div>
@@ -141,31 +141,32 @@
 
 <div class="card-deck">
   <div class="card">
-    <img src={{ general_news.6.image }} class="card-img-top" alt="...">
+    <img src='{{ general_news.6.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title"><a href={{ general_news.6.url }} target="_blank">{{ general_news.6.headline }}</a></h5>
+      <h5 class="card-title"><a href='{{ general_news.6.url }}' target="_blank">{{ general_news.6.headline }}</a></h5>
       <p class="card-text">{{ general_news.6.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ general_news.6.datetime }}</small></p>
     </div>
   </div>
   <div class="card">
-    <img src={{ general_news.7.image }} class="card-img-top" alt="...">
+    <img src='{{ general_news.7.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title"><a href={{ general_news.7.url }} target="_blank">{{ general_news.7.headline }}</a></h5>
+      <h5 class="card-title"><a href='{{ general_news.7.url }}' target="_blank">{{ general_news.7.headline }}</a></h5>
       <p class="card-text">{{ general_news.7.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ general_news.7.datetime }}</small></p>
     </div>
   </div>
   <div class="card">
-    <img src={{ general_news.8.image }} class="card-img-top" alt="...">
+    <img src='{{ general_news.8.image }}' class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title"><a href={{ general_news.8.url }} target="_blank">{{ general_news.8.headline }}</a></h5>
+      <h5 class="card-title"><a href='{{ general_news.8.url }}' target="_blank">{{ general_news.8.headline }}</a></h5>
       <p class="card-text">{{ general_news.8.summary }}</p>
       <p class="card-text"><small class="text-muted">Date published: {{ general_news.8.datetime }}</small></p>
     </div>
   </div>
 </div>
 <!-- End of 3rd row of headlines -->
+</div>
 
  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
