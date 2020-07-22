@@ -12,27 +12,33 @@
       </div>
       <div class="modal-body">
 
-          <form>
+          <!-- Sign up form -->
+          <form method="post" action="">
+
+              {% csrf_token %}
+
+              {% load widget_tweaks %}
+
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Full name">
+                {% render_field SignUpform.fullName class+="form-control" type="text" placeholder="Full name" %}
             </div>
 
             <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email address">
+                {% render_field SignUpform.email class+="form-control" type="email" placeholder="Email address" %}
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Username">
+                 {% render_field SignUpform.username class+="form-control" type="text" placeholder="Username" %}
             </div>
 
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="password">
+                {% render_field SignUpform.password class+="form-control" type="password" placeholder="password" %}
             </div>
 
           </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Sign Up</button>
+        <button type="button" class="btn btn-primary" name="SignUpButton" value="SignUpButton">Sign Up</button>
       </div>
     </div>
   </div>

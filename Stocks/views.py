@@ -7,7 +7,7 @@ import urllib3
 import json
 import requests
 import finnhub
-from .forms import StockTickerForm
+from .forms import StockTickerForm, SignUpForm
 from langdetect import detect
 
 #############################################################################################
@@ -26,47 +26,66 @@ finnhub_client = finnhub.DefaultApi(finnhub.ApiClient(configuration))
 # Create your views here.
 
 def home_view(request):
+    context = {
+        "forex_news": finnhub_client.general_news('forex', min_id=0),
+        "general_news": finnhub_client.general_news('general', min_id=0),
+        "merger_news": finnhub_client.general_news('merger', min_id=0),
+        "crypto_news": finnhub_client.general_news('crypto', min_id=0)
+    }
 
     # If the form is filled (i.e. it is a POST request), verify the input and redirect, otherwise stay on the same page
     if request.method == 'POST':
-        form = StockTickerForm(request.POST)  # Bind the form to data to be able to perform validation after
-        context = {
-            "forex_news": finnhub_client.general_news('forex', min_id=0),
-            "general_news": finnhub_client.general_news('general', min_id=0),
-            "merger_news": finnhub_client.general_news('merger', min_id=0),
-            "form": form
-        }
-        if form.is_valid():
-            uppercase_ticker = form.cleaned_data['ticker'].upper()
-            return HttpResponseRedirect(reverse('stock_market:stock_view_url', args=[uppercase_ticker]))
+
+        # Checking which button was clicked so we can know which form has been submitted The button in the HTML
+        # template that submits the form must have a 'name' and 'value' which represent a 'key'-'value' pair in the
+        # request.POST dictionary
+
+        if 'SearchButtonForm' in request.POST:
+            Searchform = StockTickerForm(request.POST)  # Bind the form to data to be able to perform validation after
+
+            if Searchform.is_valid():
+                uppercase_ticker = Searchform.cleaned_data['ticker'].upper()
+
+                return HttpResponseRedirect(reverse('stock_market:stock_view_url', args=[uppercase_ticker]))
+
+        elif 'SignUpButton' in request.POST:
+            SignUpform = SignUpForm(request.POST)  # Bind the form to data to be able to perform validation after
+
+            context['SignUpform'] = SignUpform  # Add sign up form data to context
 
     else:  # else it is a GET request
-        form = StockTickerForm()  # Empty form
-        context = {
-            "crypto_news": finnhub_client.general_news('crypto', min_id=0),
-            "general_news": finnhub_client.general_news('general', min_id=0),
-            "merger_news": finnhub_client.general_news('merger', min_id=0),
-            "form": form
-        }
+        Searchform = StockTickerForm()  # Empty search form
+        SignUpform = SignUpForm()  # Empty sign up form
+        context['SignUpform'] = SignUpform  # Add empty sign up form to context
+        context['Searchform'] = Searchform  # Add empty search form to context
 
     return render(request, 'Stocks/base.html', context)
 
 
 def stock_view(request, stock_ticker):
+    context = {
+        'ticker': stock_ticker,
+        'company_profile': finnhub_client.company_profile2(symbol=stock_ticker),
+        'quote': finnhub_client.quote(stock_ticker),
+    }
 
     # If the form is filled (i.e. it is a POST request), verify the input and redirect, otherwise stay on the same page
     if request.method == 'POST':
-        form = StockTickerForm(request.POST)  # Bind the form to data to be able to perform validation after
-        context = {
-            'ticker': stock_ticker,
-            'form': form
-        }
-        if form.is_valid():
-            uppercase_ticker = form.cleaned_data['ticker'].upper()
-            return HttpResponseRedirect(reverse('stock_market:stock_view_url', args=[uppercase_ticker]))
+
+        if 'SearchButtonForm' in request.POST:
+            Searchform = StockTickerForm(request.POST)  # Bind the form to data to be able to perform validation after
+
+            if Searchform.is_valid():
+                uppercase_ticker = Searchform.cleaned_data['ticker'].upper()
+                return HttpResponseRedirect(reverse('stock_market:stock_view_url', args=[uppercase_ticker]))
+
+        elif 'SignUpButton' in request.POST:
+            SignUpform = SignUpForm(request.POST)
+            context['SignUpform'] = SignUpform  # Add sign up form data to context
 
     else:  # else it is a GET request
-        form = StockTickerForm()  # Empty form
+        Searchform = StockTickerForm()  # Empty search form
+        SignUpform = SignUpForm()  # Empty sign up form
 
         # Getting company basics financials
         r = requests.get(
@@ -95,10 +114,11 @@ def stock_view(request, stock_ticker):
 
             if headline_number not in headlines_chosen:
                 # If the summary is empty or if the language is not english, then skip this headline
-                if news[headline_number].summary == " " or detect(news[headline_number].headline) != 'en':
+                if news[headline_number].summary == "" or detect(news[headline_number].headline) != 'en':
                     continue
                 else:
-                    headlines_chosen.append(headline_number)  # Append the headline number to the list so we don't use it again
+                    headlines_chosen.append(
+                        headline_number)  # Append the headline number to the list so we don't use it again
                     company_news.append(news[headline_number])
                     x += 1
 
@@ -107,13 +127,13 @@ def stock_view(request, stock_ticker):
 
             count += 1
 
-        context = {
-            'ticker': stock_ticker,
-            'form': form,
-            'company_profile': finnhub_client.company_profile2(symbol=stock_ticker),
-            'quote': finnhub_client.quote(stock_ticker),
-            'company_news': company_news,
-            'basic_financials': data
-        }
+        context['company_news'] = company_news
+        context['basic_financials'] = data
+        context['Searchform'] = Searchform
+        context['SignUpform'] = SignUpform
 
     return render(request, 'Stocks/StockView.html', context)
+
+
+def SignUpView(request):
+    pass

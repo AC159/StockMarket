@@ -21,14 +21,14 @@
 
         </ul>
 
-        <form class="form-inline mx-auto my-2 my-lg-0" name="stock_ticker_form" action ="" method="post">
+        <form class="form-inline mx-auto my-2 my-lg-0" name="stock_ticker_form" action="" method="post">
             {% csrf_token %}
 
             {% load widget_tweaks %}
 
-            {% render_field form.ticker class+="form-control mr-sm-2" type="search" placeholder="Search Stock Symbol" aria-label="Search" %}
+            {% render_field Searchform.ticker class+="form-control mr-sm-2" type="search" placeholder="Search Stock Symbol" aria-label="Search" %}
 
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" name="SearchButtonForm" type="submit" value="SearchButtonForm">Search</button>
 
         </form>
 
