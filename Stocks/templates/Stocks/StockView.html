@@ -10,11 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <!--Link to chart.js CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
 
-    <title id="title">{{ ticker }}</title>
+    <title>{{ ticker }}</title>
 
 </head>
 <body>
@@ -103,9 +100,6 @@
 <!-- 'Chart' tab -->
 <div class="container-md col-8 tabcontent" id="Charts_content">
 
-    <!--Canvas for charts -->
-    <canvas id="StockRecommendations"></canvas>
-
 
 </div>
 
@@ -114,7 +108,6 @@
 {% load static %}
     <link rel="stylesheet" href="{% static "stocks/StockView.css" %}">
     <script src="{% static "stocks/StockViewTabs.js" %}"></script>
-    <script src="{% static "stocks/Charts.js" %}"></script>
 
 <script>
         // Get the element with id="defaultOpen" and click on it
