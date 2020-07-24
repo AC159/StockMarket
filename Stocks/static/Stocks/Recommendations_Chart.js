@@ -11,14 +11,12 @@ var sell = [];
 
 fetch(url)
     .then( function(response){
+
         // Convert response object to json() format
-        console.log(response);
         return response.json();
+
     })
     .then( function(data) {
-
-        //Create an array of recommendation labels
-        console.log(data);
 
         //Getting the year-month-day time in chronological order
         for(let i = 0; i < data.length; i++){
@@ -28,11 +26,6 @@ fetch(url)
             hold[i] = data[data.length-1-i]['hold'];
             sell[i] = data[data.length-1-i]['sell'];
         }
-        console.log("Dates: " + dates);
-        console.log("Strong buy: " + strongBuy);
-        console.log("Buy: " + buy);
-        console.log("Hold: " + hold);
-        console.log("Sell: " + sell);
 
     })
 

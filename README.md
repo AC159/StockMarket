@@ -11,4 +11,4 @@ following: "DjangoStockMarketAppFinnhubAPIKEY"
 4) In your terminal, install django widget tweaks with the following command:
 pip install django-widget-tweaks
 
-5) Go to the Charts.js file and set the 'APIKey' constant to your own API key.
+5) Go to the Recommendations_Chart.js file and set the 'APIKey' constant to your own API key.
