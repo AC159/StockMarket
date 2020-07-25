@@ -14,8 +14,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
 
-    <!--Link to TradingView CDN using UNPKG -->
-    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 
     <title id="title">{{ ticker }}</title>
 
@@ -28,7 +26,6 @@
 <div class="container-md col-8 tab">
 
     <button class="tablinks" id="Summary_button" onclick="openTab(this.id, 'Summary_content')">Summary</button>
-    <button class="tablinks" id="Stock_Chart_button" onclick="openTab(this.id, 'Stock_Chart')">Stock Chart</button>
     <button class="tablinks" id="Recommendations_button" onclick="openTab(this.id, 'Recommendations_content')">Recommendations</button>
     <button class="tablinks" id="Price_target_button" onclick="openTab(this.id, 'Price_Target_content')">Price Target</button>
 
@@ -104,14 +101,6 @@
 </div> <!-- End of 'Summary' tab -->
 
 
-<!-- 'Stock Chart' tab -->
-<div class="container-md col-8 tabcontent" id="Stock_Chart">
-
-
-
-</div>
-<!-- End of 'Stock Chart' tab -->
-
 
 <!-- 'Recommendations tab' tab -->
 <div class="container-md col-8 tabcontent" id="Recommendations_content">
@@ -142,7 +131,6 @@
     <script src="{% static "stocks/StockViewTabs.js" %}"></script>
     <script src="{% static "stocks/Recommendations_Chart.js" %}"></script>
     <script src="{% static "stocks/Price_Target_Chart.js" %}"></script>
-    <script src="{% static "stocks/Candle_Chart.js" %}"></script>
 
 <script>
         // Get the element with id="defaultOpen" and click on it
