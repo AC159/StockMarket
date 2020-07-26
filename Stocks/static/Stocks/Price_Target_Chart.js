@@ -47,7 +47,8 @@ var chart = new Chart(ctx, {
             display: true,
             position: 'top',
             text: 'Price Targets',
-            fontStyle: 'bold'
+            fontStyle: 'bold',
+            responsive: true,
         }
 
     }

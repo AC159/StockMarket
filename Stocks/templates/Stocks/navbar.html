@@ -33,15 +33,9 @@
         </form>
 
 
-        <button class="btn btn-outline-primary mx-1 my-2 my-sm-0" type="button">Login</button>
-       <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-          Sign Up
-        </button>
+        <a href="" class="btn btn-outline-primary mx-1 my-2 my-sm-0">Login</a>
+        <a href="{% url 'stock_market:sign_up_view' %}" class="btn btn-primary">Sign Up</a>
 
     </div>
 
 </nav>
-
-
-{% include "Stocks/SignUpModal.html" %}

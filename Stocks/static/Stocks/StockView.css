@@ -42,8 +42,23 @@
   animation: fadeEffect 1s; /* Fading effect takes 1 second */
 }
 
+#StockViewTabsNavbar{
+    background-color: #f1f1f1!important;
+}
+
+.navbar-toggler{
+     margin: auto;
+}
+
 /* Go from zero to full opacity */
 @keyframes fadeEffect {
   from {opacity: 0;}
   to {opacity: 1;}
+}
+
+/*For small screens*/
+@media only screen and (max-width: 960px){
+    .wrapper{
+        overflow-x: scroll;
+    }
 }

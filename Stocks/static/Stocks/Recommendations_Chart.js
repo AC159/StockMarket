@@ -73,7 +73,8 @@ var chart = new Chart(ctx, {
             display: true,
             position: 'top',
             text: 'Recommendation Trends',
-            fontStyle: 'bold'
+            fontStyle: 'bold',
+            responsive: true,
         }
 
     }

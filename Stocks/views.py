@@ -36,7 +36,7 @@ def home_view(request):
     # If the form is filled (i.e. it is a POST request), verify the input and redirect, otherwise stay on the same page
     if request.method == 'POST':
 
-        # Checking which button was clicked so we can know which form has been submitted The button in the HTML
+        # Checking which button was clicked so we can know which form has been submitted. The button in the HTML
         # template that submits the form must have a 'name' and 'value' which represent a 'key'-'value' pair in the
         # request.POST dictionary
 
@@ -45,18 +45,10 @@ def home_view(request):
 
             if Searchform.is_valid():
                 uppercase_ticker = Searchform.cleaned_data['ticker'].upper()
-
                 return HttpResponseRedirect(reverse('stock_market:stock_view_url', args=[uppercase_ticker]))
-
-        elif 'SignUpButton' in request.POST:
-            SignUpform = SignUpForm(request.POST)  # Bind the form to data to be able to perform validation after
-
-            context['SignUpform'] = SignUpform  # Add sign up form data to context
 
     else:  # else it is a GET request
         Searchform = StockTickerForm()  # Empty search form
-        SignUpform = SignUpForm()  # Empty sign up form
-        context['SignUpform'] = SignUpform  # Add empty sign up form to context
         context['Searchform'] = Searchform  # Add empty search form to context
 
     return render(request, 'Stocks/base.html', context)
@@ -79,13 +71,8 @@ def stock_view(request, stock_ticker):
                 uppercase_ticker = Searchform.cleaned_data['ticker'].upper()
                 return HttpResponseRedirect(reverse('stock_market:stock_view_url', args=[uppercase_ticker]))
 
-        elif 'SignUpButton' in request.POST:
-            SignUpform = SignUpForm(request.POST)
-            context['SignUpform'] = SignUpform  # Add sign up form data to context
-
     else:  # else it is a GET request
         Searchform = StockTickerForm()  # Empty search form
-        SignUpform = SignUpForm()  # Empty sign up form
 
         # Getting company basics financials
         r = requests.get(
@@ -130,10 +117,43 @@ def stock_view(request, stock_ticker):
         context['company_news'] = company_news
         context['basic_financials'] = data
         context['Searchform'] = Searchform
-        context['SignUpform'] = SignUpform
 
     return render(request, 'Stocks/StockView.html', context)
 
 
-def SignUpView(request):
+def sign_up_view(request):
+    context = {}
+
+    if request.method == 'POST':
+        if "SearchButtonForm" in request.POST:
+            Searchform = StockTickerForm(request.POST)
+
+            if Searchform.is_valid():
+                uppercase_ticker = Searchform.cleaned_data['ticker'].upper()
+                return HttpResponseRedirect(reverse('stock_market:stock_view_url', args=[uppercase_ticker]))
+
+        elif "SignUpButton" in request.POST:
+            signUpForm = SignUpForm(request.POST)
+
+            if signUpForm.is_valid():
+                # Create a session for the user
+
+
+
+
+                return HttpResponseRedirect(reverse('stock_market:home'))
+
+    else:
+
+        context["SignUpform"] = SignUpForm()
+        context["Searchform"] = StockTickerForm()
+
+        return render(request, 'Stocks/SignUpView.html', context)
+
+
+def login_view(request):
+    pass
+
+
+def logout_view(request):
     pass
