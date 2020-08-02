@@ -1,0 +1,24 @@
+body{
+    background-image: url("https://www.muralswallpaper.com/app/uploads/wall-street-plain.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@keyframes SignUpForm {
+    from{
+        margin-top: 0;
+        opacity: 0;
+    }
+
+    to{
+        margin-top: 50%;
+        opacity: 100%;
+    }
+}
+
+#SignUpForm{
+    margin-top: 50%;
+    animation-name: SignUpForm;
+    animation-duration: 3s;
+    animation-timing-function: ease;
+}

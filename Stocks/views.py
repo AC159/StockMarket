@@ -9,6 +9,7 @@ import requests
 import finnhub
 from .forms import StockTickerForm, SignUpForm
 from langdetect import detect
+import bcrypt
 
 #############################################################################################
 
@@ -53,6 +54,7 @@ def home_view(request):
 
     return render(request, 'Stocks/base.html', context)
 
+#####################################################################################################################
 
 def stock_view(request, stock_ticker):
     context = {
@@ -97,7 +99,12 @@ def stock_view(request, stock_ticker):
         # Choosing 10 random headlines from the list
         count, x = 0, 0
         while x < 10:
-            headline_number = randint(0, len(news) - 1)  # Generate random news number to pick from
+
+            try:
+                headline_number = randint(0, len(news) - 1)  # Generate random news number to pick from
+            except ValueError:
+                # There are no headlines
+                break
 
             if headline_number not in headlines_chosen:
                 # If the summary is empty or if the language is not english, then skip this headline
@@ -139,8 +146,6 @@ def sign_up_view(request):
                 # Create a session for the user
 
 
-
-
                 return HttpResponseRedirect(reverse('stock_market:home'))
 
     else:
@@ -152,7 +157,9 @@ def sign_up_view(request):
 
 
 def login_view(request):
-    pass
+    context = {}
+
+    return render(request, 'Stocks/LoginView.html', context)
 
 
 def logout_view(request):
