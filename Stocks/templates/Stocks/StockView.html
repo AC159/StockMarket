@@ -18,7 +18,7 @@
     <title id="title">{{ ticker }}</title>
 
 </head>
-<body>
+<body onload="Convert()">
 
 
 {% include "Stocks/navbar.html" %}
@@ -104,7 +104,7 @@
       <div class="card-body">
         <h5 class="card-title"><a href="{{ news.url }}" target="_blank">{{ news.headline | safe }}</a></h5>
         <p class="card-text">{{ news.summary|truncatewords:100 }}</p>
-        <p class="card-text"><small class="text-muted">Date published: {{ news.datetime }}</small></p>
+        <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ news.datetime }}</small></p>
       </div>
     </div>
   </div>
@@ -148,6 +148,7 @@
     <script src="{% static "stocks/StockViewTabs.js" %}"></script>
     <script src="{% static "stocks/Recommendations_Chart.js" %}"></script>
     <script src="{% static "stocks/Price_Target_Chart.js" %}"></script>
+    <script src="{% static 'Stocks/UnixTimeConversionMethod.js' %}"></script>
 
 <script>
         // Get the element with id="defaultOpen" and click on it
