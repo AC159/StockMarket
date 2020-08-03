@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Stocks/SignUp&LoginView.css' %}">
 
     <title>Login</title>
 
@@ -18,20 +20,35 @@
 
 {% include "Stocks/navbar.html" %}
 
-<div class="modal">
+<div class="container-lg col-lg-4">
 
-    <div class="modal-dialog">
+    <form method="post" action="" id="LoginForm">
 
-        <div class="modal-content">
+        {% if messages %}
 
-            <div class="modal-body">
+            {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
 
-            </div>
+        {% endif %}
 
+        {% csrf_token %}
+
+        {% load widget_tweaks %}
+
+        <div class="form-group">
+            {% render_field LoginForm.username class+="form-control" type="text" placeholder="Username" %}
         </div>
 
-    </div>
+        <div class="form-group">
+            {% render_field LoginForm.password class+="form-control" type="password" placeholder="password" %}
+        </div>
 
+        <button type="submit" class="btn btn-primary" name="LoginButton" value="LoginButton">Login</button>
+
+    </form>
 
 </div>
 

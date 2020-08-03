@@ -20,3 +20,10 @@ body{
     animation-duration: 3s;
     animation-timing-function: ease;
 }
+
+#LoginForm{
+    margin-top: 50%;
+    animation-name: SignUpForm;
+    animation-duration: 3s;
+    animation-timing-function: ease;
+}

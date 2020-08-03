@@ -14,3 +14,8 @@ class SignUpForm(forms.Form):
     email = forms.EmailField(label='', required=True)
     username = forms.CharField(label='', max_length=15, required=True)
     password = forms.CharField(label='', max_length=20, required=True)
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label='', max_length=15, required=True)
+    password = forms.CharField(label='', max_length=20, required=True)

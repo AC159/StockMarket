@@ -3,11 +3,12 @@ from random import randint
 import os
 from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
+from django.contrib import messages
 import requests
 import finnhub
-from .forms import StockTickerForm, SignUpForm
+from .forms import StockTickerForm, SignUpForm, LoginForm
 from langdetect import detect
 
 #############################################################################################
@@ -147,17 +148,25 @@ def sign_up_view(request):
 
             if signUpForm.is_valid():
                 # Fetching form data
-                firstName = request.POST['firstName']
+                firstName = signUpForm.cleaned_data['firstName']
                 lastName = request.POST['lastName']
-                email = request.POST['email']
-                username = request.POST['username']
-                password = request.POST['password']
+                email = signUpForm.cleaned_data['email']
+                username = signUpForm.cleaned_data['username']
+                password = signUpForm.cleaned_data['password']
 
-                # Create a new user from  User model object and save it to the database
-                user = User.objects.create_user(first_name=firstName, last_name=lastName, email=email, username=username, password=password)
-                login(request, user)  # login the created user and redirect
+                if User.objects.filter(username=signUpForm.cleaned_data['username']).exists():
+                    messages.add_message(request, messages.ERROR, 'Username already taken!')
+                    context["SignUpform"] = signUpForm
+                    context["Searchform"] = StockTickerForm()
+                    return render(request, 'Stocks/SignUpView.html', context)
 
-                return HttpResponseRedirect(reverse('stock_market:home'))
+                else:
+                    # Create a new user from  User model object and save it to the database
+                    user = User.objects.create_user(first_name=firstName, last_name=lastName, email=email,
+                                                    username=username, password=password)
+                    login(request, user)  # login the created user and redirect
+
+                    return HttpResponseRedirect(reverse('stock_market:home'))
 
     else:
 
@@ -170,10 +179,49 @@ def sign_up_view(request):
 def login_view(request):
     context = {}
 
-    return render(request, 'Stocks/LoginView.html', context)
+    if request.method == 'GET':
+        loginform = LoginForm()
+        searchform = StockTickerForm()
+        context['LoginForm'] = loginform
+        context['Searchform'] = searchform
+        return render(request, 'Stocks/LoginView.html', context)
+
+    elif request.method == 'POST':
+
+        # If the user searches for a stock ticker (even though they shouldn't)
+        if "SearchButtonForm" in request.POST:
+            Searchform = StockTickerForm(request.POST)
+
+            if Searchform.is_valid():
+                uppercase_ticker = Searchform.cleaned_data['ticker'].upper()
+                return HttpResponseRedirect(reverse('stock_market:stock_view_url', args=[uppercase_ticker]))
+
+        else:
+
+            loginform = LoginForm(request.POST)
+
+            if loginform.is_valid():
+
+                username1 = loginform.cleaned_data['username']
+                password1 = loginform.cleaned_data['password']
+
+                # Validate user credentials
+                user = authenticate(request, username=username1, password=password1)
+
+                if user is not None:
+                    login(request, user)
+                    # Redirect to home page
+                    return HttpResponseRedirect(reverse('stock_market:home'))
+
+                else:
+                    # Display an error message
+                    messages.add_message(request, messages.ERROR, "Invalid credentials!")
+                    context['LoginForm'] = loginform
+                    searchform = StockTickerForm()
+                    context['Searchform'] = searchform
+                    return render(request, 'Stocks/LoginView.html', context)
 
 
 def logout_view(request):
-    context = {}
     logout(request)
-    return render(request,  'Stocks/LogoutView.html', context)
+    return HttpResponseRedirect(reverse('stock_market:home'))
