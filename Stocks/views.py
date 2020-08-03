@@ -3,13 +3,12 @@ from random import randint
 import os
 from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
-import urllib3
-import json
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 import requests
 import finnhub
 from .forms import StockTickerForm, SignUpForm
 from langdetect import detect
-import bcrypt
 
 #############################################################################################
 
@@ -34,6 +33,9 @@ def home_view(request):
         "crypto_news": finnhub_client.general_news('crypto', min_id=0)
     }
 
+    if request.user.is_authenticated:
+        context["Username"] = request.user
+
     # If the form is filled (i.e. it is a POST request), verify the input and redirect, otherwise stay on the same page
     if request.method == 'POST':
 
@@ -53,6 +55,7 @@ def home_view(request):
         context['Searchform'] = Searchform  # Add empty search form to context
 
     return render(request, 'Stocks/base.html', context)
+
 
 #####################################################################################################################
 
@@ -143,8 +146,16 @@ def sign_up_view(request):
             signUpForm = SignUpForm(request.POST)
 
             if signUpForm.is_valid():
-                # Create a session for the user
+                # Fetching form data
+                firstName = request.POST['firstName']
+                lastName = request.POST['lastName']
+                email = request.POST['email']
+                username = request.POST['username']
+                password = request.POST['password']
 
+                # Create a new user from  User model object and save it to the database
+                user = User.objects.create_user(first_name=firstName, last_name=lastName, email=email, username=username, password=password)
+                login(request, user)  # login the created user and redirect
 
                 return HttpResponseRedirect(reverse('stock_market:home'))
 
@@ -163,4 +174,6 @@ def login_view(request):
 
 
 def logout_view(request):
-    pass
+    context = {}
+    logout(request)
+    return render(request,  'Stocks/LogoutView.html', context)

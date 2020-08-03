@@ -145,7 +145,7 @@
     <div class="card-body">
       <h5 class="card-title"><a href='{{ general_news.6.url }}' target="_blank">{{ general_news.6.headline }}</a></h5>
       <p class="card-text">{{ general_news.6.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: {{ general_news.6.datetime }}</small></p>
+      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ general_news.6.datetime }}</small></p>
     </div>
   </div>
   <div class="card">
@@ -153,7 +153,7 @@
     <div class="card-body">
       <h5 class="card-title"><a href='{{ general_news.7.url }}' target="_blank">{{ general_news.7.headline }}</a></h5>
       <p class="card-text">{{ general_news.7.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted date">{{ general_news.7.datetime }}</small></p>
+      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ general_news.7.datetime }}</small></p>
     </div>
   </div>
   <div class="card">
@@ -161,7 +161,7 @@
     <div class="card-body">
       <h5 class="card-title"><a href='{{ general_news.8.url }}' target="_blank">{{ general_news.8.headline }}</a></h5>
       <p class="card-text">{{ general_news.8.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted date">{{ general_news.8.datetime }}</small></p>
+      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ general_news.8.datetime }}</small></p>
     </div>
   </div>
 </div>
@@ -171,6 +171,7 @@
 
     {% load static %}
     <script src="{% static 'Stocks/UnixTimeConversionMethod.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'Stocks/Navbar.css' %}">
 
 
  <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -33,9 +33,17 @@
         </form>
 
 
-        <a href="{% url 'stock_market:login_view' %}" class="btn btn-outline-primary mx-1 my-2 my-sm-0">Login</a>
-        <a href="{% url 'stock_market:sign_up_view' %}" class="btn btn-primary">Sign Up</a>
+        {% if Username %}
 
+            <a href="" id="username_tag">{{ Username }}</a>
+            <a href="{% url 'stock_market:logout_view' %}" class="btn btn-primary">logout</a>
+
+        {% else %}
+
+            <a href="{% url 'stock_market:login_view' %}" class="btn btn-outline-primary mx-1 my-2 my-sm-0">Login</a>
+            <a href="{% url 'stock_market:sign_up_view' %}" class="btn btn-primary">Sign Up</a>
+
+        {% endif %}
     </div>
 
 </nav>
