@@ -17,161 +17,51 @@
 
 {% include "Stocks/navbar.html" %}
 
-<div class="container-md col-8">
-<!-- 1st row of merger headlines -->
-<div class="card-deck">
-  <div class="card">
-    <img src='{{ merger_news.0.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><a href='{{ merger_news.0.url }}' target="_blank">{{ merger_news.0.headline }}</a></h5>
-      <p class="card-text">{{ merger_news.0.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ merger_news.0.datetime }}</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src='{{ merger_news.1.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><a href='{{ merger_news.1.url }}' target="_blank">{{ merger_news.1.headline }}</a></h5>
-      <p class="card-text">{{ merger_news.1.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ merger_news.1.datetime }}</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src='{{ merger_news.2.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title"><a href='{{ merger_news.2.url }}' target="_blank">{{ merger_news.2.headline }}</a></h5>
-      <p class="card-text">{{ merger_news.2.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ merger_news.2.datetime }}</small></p>
-    </div>
-  </div>
-</div>
-<!-- End of 1st row of merger headlines -->
+<div class="container-lg col-lg-8 tab">
 
-<!-- 1st row of crypto headlines -->
-<div class="card-deck">
-  <div class="card">
-    <img src='{{ crypto_news.0.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><a href='{{ crypto_news.0.url }}' target="_blank">{{ crypto_news.0.headline }}</a></h5>
-      <p class="card-text">{{ crypto_news.0.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ crypto_news.0.datetime }}</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src='{{ crypto_news.3.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><a href='{{ crypto_news.3.url }}' target="_blank">{{ crypto_news.3.headline|safe }}</a></h5>
-      <p class="card-text">{{ crypto_news.3.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ crypto_news.3.datetime }}</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src='{{ crypto_news.2.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title"><a href='{{ crypto_news.2.url }}' target="_blank">{{ crypto_news.2.headline }}</a></h5>
-      <p class="card-text">{{ crypto_news.2.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ crypto_news.2.datetime }}</small></p>
-    </div>
-  </div>
-</div>
-<!-- End of 1st row of crypto headlines -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="StockViewTabsNavbar">
 
-<!-- 1st row of headlines -->
-<div class="card-deck">
-  <div class="card">
-    <img src='{{ general_news.0.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><a href='{{ general_news.0.url }}' target="_blank">{{ general_news.0.headline }}</a></h5>
-      <p class="card-text">{{ general_news.0.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ general_news.0.datetime }}</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src='{{ general_news.1.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><a href='{{ general_news.1.url }}' target="_blank">{{ general_news.1.headline }}</a></h5>
-      <p class="card-text">{{ general_news.1.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ general_news.1.datetime }}</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src='{{ general_news.2.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title"><a href='{{ general_news.2.url }}' target="_blank">{{ general_news.2.headline }}</a></h5>
-      <p class="card-text">{{ general_news.2.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ general_news.2.datetime }}</small></p>
-    </div>
-  </div>
-</div>
-<!-- End of 1st row of headlines -->
+        <!-- Sandwich button -->
+        <button class="navbar-toggler mr-sm-2" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
 
-<!-- 2nd row of headlines -->
+            <span class="navbar-toggler-icon"></span>
 
-<div class="card-deck">
-  <div class="card">
-    <img src='{{ general_news.3.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><a href='{{ general_news.3.url }}' target="_blank">{{ general_news.3.headline }}</a></h5>
-      <p class="card-text">{{ general_news.3.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ general_news.3.datetime }}</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src='{{ general_news.4.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><a href='{{ general_news.4.url }}' target="_blank">{{ general_news.4.headline }}</a></h5>
-      <p class="card-text">{{ general_news.4.summary|truncatewords:45}}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ general_news.4.datetime }}</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src='{{ general_news.5.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><a href='{{ general_news.5.url }}' target="_blank">{{ general_news.5.headline }}</a></h5>
-      <p class="card-text">{{ general_news.5.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ general_news.5.datetime }}</small></p>
-    </div>
-  </div>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <button type="button" class="tabButton" id="GeneralNewsButton" onclick="changeNewsTab(this.id, 'General_News')">General</button>
+            <button type="button" class="tabButton" id="MergerNewsButton" onclick="changeNewsTab(this.id, 'Merger_News')">Crypto</button>
+            <button type="button" class="tabButton" id="CryptoNewsButton" onclick="changeNewsTab(this.id, 'Crypto_News')">Merger</button>
+            <button type="button" class="tabButton" id="ForexNewsButton" onclick="changeNewsTab(this.id, 'Forex_News')">Forex</button>
+        </div>
+    </nav>
+
+
+
 </div>
 
-<!-- End of 2nd row of headlines -->
+
+{% include 'Stocks/Merger_News.html' %}
 
 
-<!-- 3rd row of headlines -->
+{% include 'Stocks/Crypto_News.html' %}
 
-<div class="card-deck">
-  <div class="card">
-    <img src='{{ general_news.6.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><a href='{{ general_news.6.url }}' target="_blank">{{ general_news.6.headline }}</a></h5>
-      <p class="card-text">{{ general_news.6.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ general_news.6.datetime }}</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src='{{ general_news.7.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><a href='{{ general_news.7.url }}' target="_blank">{{ general_news.7.headline }}</a></h5>
-      <p class="card-text">{{ general_news.7.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ general_news.7.datetime }}</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src='{{ general_news.8.image }}' class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><a href='{{ general_news.8.url }}' target="_blank">{{ general_news.8.headline }}</a></h5>
-      <p class="card-text">{{ general_news.8.summary|truncatewords:45 }}</p>
-      <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ general_news.8.datetime }}</small></p>
-    </div>
-  </div>
-</div>
-<!-- End of 3rd row of headlines -->
-</div>
+{% include 'Stocks/Forex_News.html' %}
+
+
+{% include 'Stocks/General_News.html' %}
+
 
 
     {% load static %}
     <script src="{% static 'Stocks/UnixTimeConversionMethod.js' %}"></script>
     <link rel="stylesheet" href="{% static 'Stocks/Navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'Stocks/HomePageNews.css' %}">
+    <script src="{% static 'Stocks/HomePageNews.js' %}"></script>
+
+    <script>
+        document.getElementById('GeneralNewsButton').click();
+    </script>
 
 
  <!-- jQuery first, then Popper.js, then Bootstrap JS -->

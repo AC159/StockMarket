@@ -1,0 +1,24 @@
+
+<div class="container-lg col-lg-8 tabcontent" id="Merger_News">
+
+   {% for news in merger_news|slice:":50" %}
+
+        <div class="card mb-3">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="{{ news.image }}" class="card-img" alt="">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><a href="{{ news.url }}" target="_blank">{{ news.headline|safe }}</a></h5>
+                <p class="card-text">{{ news.summary|truncatewords:100 }}</p>
+                <p class="card-text"><small class="text-muted">Date published: </small><small class="text-muted date">{{ news.datetime }}
+                                                                                                                                            </small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    {% endfor %}
+
+</div>

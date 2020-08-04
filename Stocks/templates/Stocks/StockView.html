@@ -92,7 +92,7 @@
 
 <!--Company News -->
 
-{% for news in company_news %}
+{% for news in company_news|slice:":50" %}
 
 <div class="card mb-3">
   <div class="row no-gutters">
@@ -137,9 +137,6 @@
     </div>
 
 <!-- End of 'Price Target' tab -->
-
-
-
 
 
 
