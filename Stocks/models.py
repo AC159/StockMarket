@@ -1,7 +1,5 @@
-from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
-# Create your models here.
-
-# Creating our own django model (we are not using the django authentication system)
+# Create your models here. We are using Django auhentication system.
 

@@ -18,7 +18,7 @@
     <title id="title">{{ ticker }}</title>
 
 </head>
-<body onload="Convert()">
+<body>
 
 
 {% include "Stocks/navbar.html" %}
@@ -46,13 +46,13 @@
 
 
 <!-- 'Summary' tab -->
-<div class="container-lg col-lg-8 tabcontent" id="Summary_content">
+<div class="container-xl col-xl-8 tabcontent" id="Summary_content">
 {% load humanize %}
 
     <h5>{{ company_profile.name }} -- {{ ticker }} ({{ company_profile.exchange }})</h5>
     <p><small>Currency: {{ company_profile.currency }} -- Country: {{ company_profile.country }} -- Industry: {{ company_profile.finnhub_industry }}</small></p>
 
-    <h2>{{ quote.c|intcomma }}</h2>
+    <h2 id="CurrentQuote">{{ quote.c|intcomma }}</h2>
 
     <table class="table table-striped">
   <thead>
@@ -67,15 +67,15 @@
       <td>Market Cap (in millions):  {{ company_profile.market_capitalization|intcomma }}</td>
     </tr>
     <tr>
-      <td>Open: {{ quote.o|intcomma }}</td>
+      <td id="Open">Open: {{ quote.o|intcomma }}</td>
       <td>Outstanding shares (in millions):  {{ company_profile.share_outstanding|intcomma }}</td>
     </tr>
     <tr>
-      <td>High: {{ quote.h|intcomma }}</td>
+      <td id="High">High: {{ quote.h|intcomma }}</td>
       <td>10 Day avg trading volume (in millions): {{ basic_financials.metric.10DayAverageTradingVolume|intcomma }}</td>
     </tr>
     <tr>
-      <td>Low: {{ quote.l|intcomma }}</td>
+      <td id="Low">Low: {{ quote.l|intcomma }}</td>
       <td>52 week high: {{ basic_financials.metric.52WeekHigh|intcomma }}</td>
     </tr>
     <tr>
@@ -150,6 +150,12 @@
 <script>
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("Summary_button").click();
+
+        window.onload = function(){
+            Convert();
+        }
+        //Update the stock price each 3 second interval
+        window.setInterval(update_Price, 3000);
 </script>
 
 

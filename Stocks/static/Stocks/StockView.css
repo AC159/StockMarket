@@ -1,15 +1,3 @@
-.card{
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.card-img {
-    width: 100%;
-    height: 10vw;
-    object-fit: cover;
-}
-
 /* Style the tab */
 .tab {
   overflow: hidden;
