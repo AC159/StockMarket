@@ -154,8 +154,11 @@
         window.onload = function(){
             Convert();
         }
-        //Update the stock price each 3 second interval
-        window.setInterval(update_Price, 3000);
+        let d = new Date();
+        if(d.getDay() !== 0 && d.getDay() !== 6 && d.getHours() < 16 && d.getHours() > 9) {
+            //Update the stock price each 3 second interval
+            window.setInterval(update_Price, 3000);
+        }
 </script>
 
 
