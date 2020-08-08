@@ -1,5 +1,4 @@
 import datetime
-from random import randint
 import os
 from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
@@ -8,7 +7,7 @@ from django.contrib import messages
 import requests
 import finnhub
 from .forms import StockTickerForm, SignUpForm, LoginForm
-from .models import Member
+from django.contrib.auth.models import User
 
 #############################################################################################
 
@@ -91,7 +90,7 @@ def stock_view(request, stock_ticker):
         day = '{:02d}'.format(now.day)
         year_month_day2 = '{}-{}-{}'.format(year, month, day)
 
-        year1 = '{:02d}'.format(now.year -1)
+        year1 = '{:02d}'.format(now.year - 1)
         year_before = '{:02d}'.format(now.month - 12)
         year_month_day1 = '{}-{}-{}'.format(year1, year_before, day)
 
@@ -104,6 +103,8 @@ def stock_view(request, stock_ticker):
 
     return render(request, 'Stocks/StockView.html', context)
 
+
+##################################################################################################################
 
 def sign_up_view(request):
     context = {}
@@ -125,7 +126,7 @@ def sign_up_view(request):
                 username = signUpForm.cleaned_data['username']
                 password = signUpForm.cleaned_data['password']
 
-                if Member.objects.filter(username=signUpForm.cleaned_data['username']):
+                if User.objects.filter(username=signUpForm.cleaned_data['username']):
                     messages.add_message(request, messages.ERROR, 'Username already taken!')
                     context["SignUpform"] = signUpForm
                     context["Searchform"] = StockTickerForm()
@@ -133,10 +134,10 @@ def sign_up_view(request):
 
                 else:
                     # Create a new user from Member model object and save it to the database
-                    member = Member(email=email, username=username, password=password)
+                    member = User.objects.create_user(email=email, username=username, password=password)
                     member.save()
 
-                    # login(request, member)  # login the created user and redirect
+                    login(request, member)  # login the created user and redirect
 
                     return HttpResponseRedirect(reverse('stock_market:home'))
 
@@ -147,6 +148,8 @@ def sign_up_view(request):
 
         return render(request, 'Stocks/SignUpView.html', context)
 
+
+###################################################################################################################
 
 def login_view(request):
     context = {}
@@ -174,8 +177,8 @@ def login_view(request):
 
             if loginform.is_valid():
 
-                username1 = loginform.cleaned_data['username']
-                password1 = loginform.cleaned_data['password']
+                username1 = request.POST['username']
+                password1 = request.POST['password']
 
                 # Validate user credentials
                 user = authenticate(request, username=username1, password=password1)
@@ -193,6 +196,8 @@ def login_view(request):
                     context['Searchform'] = searchform
                     return render(request, 'Stocks/LoginView.html', context)
 
+
+################################################################################################################
 
 def logout_view(request):
     logout(request)
