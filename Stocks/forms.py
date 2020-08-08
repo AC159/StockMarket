@@ -9,8 +9,6 @@ class StockTickerForm(forms.Form):
 
 # User form for sign up
 class SignUpForm(forms.Form):
-    firstName = forms.CharField(label='', max_length=30, required=True)
-    lastName = forms.CharField(label='', max_length=30, required=True)
     email = forms.EmailField(label='', required=True)
     username = forms.CharField(label='', max_length=15, required=True)
     password = forms.CharField(label='', max_length=20, required=True)

@@ -4,12 +4,11 @@ import os
 from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.models import User
 from django.contrib import messages
 import requests
 import finnhub
 from .forms import StockTickerForm, SignUpForm, LoginForm
-from langdetect import detect
+from .models import Member
 
 #############################################################################################
 
@@ -122,23 +121,22 @@ def sign_up_view(request):
 
             if signUpForm.is_valid():
                 # Fetching form data
-                firstName = signUpForm.cleaned_data['firstName']
-                lastName = request.POST['lastName']
                 email = signUpForm.cleaned_data['email']
                 username = signUpForm.cleaned_data['username']
                 password = signUpForm.cleaned_data['password']
 
-                if User.objects.filter(username=signUpForm.cleaned_data['username']).exists():
+                if Member.objects.filter(username=signUpForm.cleaned_data['username']):
                     messages.add_message(request, messages.ERROR, 'Username already taken!')
                     context["SignUpform"] = signUpForm
                     context["Searchform"] = StockTickerForm()
                     return render(request, 'Stocks/SignUpView.html', context)
 
                 else:
-                    # Create a new user from  User model object and save it to the database
-                    user = User.objects.create_user(first_name=firstName, last_name=lastName, email=email,
-                                                    username=username, password=password)
-                    login(request, user)  # login the created user and redirect
+                    # Create a new user from Member model object and save it to the database
+                    member = Member(email=email, username=username, password=password)
+                    member.save()
+
+                    # login(request, member)  # login the created user and redirect
 
                     return HttpResponseRedirect(reverse('stock_market:home'))
 

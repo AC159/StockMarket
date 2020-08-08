@@ -1,5 +1,12 @@
-from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 
-# Create your models here. We are using Django auhentication system.
+# Create your models here.
 
+class Member(models.Model):
+    username = models.CharField(max_length=50)
+    email = models.EmailField(max_length=200)
+    password = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.username
