@@ -12,3 +12,13 @@ following: "DjangoStockMarketAppFinnhubAPIKEY"
 pip install django-widget-tweaks
 
 5) Go to the Recommendations_Chart.js file and set the 'APIKey' constant to your own API key.
+
+6) Include a .env file at the root folder of the project and include:
+    DATABASE_NAME=stockmarketapp
+    DATABASE_USER=postgres
+    DATABASE_PASSWORD=postgres
+    DATABASE_HOST=localhost
+    DATABASE_PORT=5432
+    
+    DjangoStockMarketAppFinnhubAPIKEY=<your api key>
+    DjangoStockMarketAppSecretKey=<your secret key>

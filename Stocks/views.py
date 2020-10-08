@@ -8,13 +8,16 @@ import requests
 import finnhub
 from .forms import StockTickerForm, SignUpForm, LoginForm
 from django.contrib.auth.models import User
+from dotenv import find_dotenv, load_dotenv
+
+load_dotenv(find_dotenv('.env'))
 
 #############################################################################################
 
 # Configure API key for finnhub API
 configuration = finnhub.Configuration(
     api_key={
-        'token': os.environ.get('DjangoStockMarketAppFinnhubAPIKEY')
+        'token': os.environ['DjangoStockMarketAppFinnhubAPIKEY']
     }
 )
 finnhub_client = finnhub.DefaultApi(finnhub.ApiClient(configuration))
