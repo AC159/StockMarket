@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'StockMarketApp.wsgi.application'
 DATABASES = {}
 # if environment variable present, it must be Heroku
 # replace default with parsed value
-DATABASES['default'] = dj_database_url.config()
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 
 
