@@ -1,1 +1,1 @@
-web: gunicorn StockMarketApp.wsgi
+web: gunicorn StockMarketApp.wsgi:application
