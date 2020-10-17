@@ -28,7 +28,8 @@ SECRET_KEY = os.environ['DjangoStockMarketAppSecretKey']
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '127.0.0.1'
+    '127.0.0.1',
+    'ac-stock-market-app.herokuapp.com/'
 ]
 
 
