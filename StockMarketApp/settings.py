@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
+import dj_database_url
 from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv('.env'))
 
@@ -93,6 +95,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         # Heroku does not need these variables:
+
         # 'NAME': os.environ['DATABASE_NAME'],
         # 'USER': os.environ['DATABASE_USER'],
         # 'PASSWORD': os.environ['DATABASE_PASSWORD'],
@@ -101,6 +104,7 @@ DATABASES = {
     }
 }
 
+DATABASES['default'] = dj_database_url.config()
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
