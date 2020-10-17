@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+import django_heroku
 import dj_database_url
 from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv('.env'))
@@ -135,3 +135,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'Stocks/static/')
 STATIC_URL = '/static/'
+
+
+# Configure Django App for Heroku.
+django_heroku.settings(locals())
