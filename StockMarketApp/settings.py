@@ -91,23 +91,13 @@ WSGI_APPLICATION = 'StockMarketApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        # Heroku does not need these variables:
-
-        'NAME': os.environ['DATABASE_NAME'],
-        'USER': os.environ['DATABASE_USER'],
-        'PASSWORD': os.environ['DATABASE_PASSWORD'],
-        'HOST': os.environ['DATABASE_HOST'],
-        'PORT': os.environ['DATABASE_PORT'],
-    }
-}
-
+DATABASES = {}
 # if environment variable present, it must be Heroku
-if 'DATABASE_URL' in os.environ:
-    # replace default with parsed value
+# replace default with parsed value
+try:
     DATABASES['default'] = dj_database_url.config(ssl_require=True)
+except:
+    DATABASES['default'] = os.environ['DATABASE_URL']
 
 
 # Password validation
