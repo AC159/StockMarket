@@ -96,15 +96,19 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         # Heroku does not need these variables:
 
-        # 'NAME': os.environ['DATABASE_NAME'],
-        # 'USER': os.environ['DATABASE_USER'],
-        # 'PASSWORD': os.environ['DATABASE_PASSWORD'],
-        # 'HOST': os.environ['DATABASE_HOST'],
-        # 'PORT': os.environ['DATABASE_PORT'],
+        'NAME': os.environ['DATABASE_NAME'],
+        'USER': os.environ['DATABASE_USER'],
+        'PASSWORD': os.environ['DATABASE_PASSWORD'],
+        'HOST': os.environ['DATABASE_HOST'],
+        'PORT': os.environ['DATABASE_PORT'],
     }
 }
 
-DATABASES['default'] = dj_database_url.config()
+# if environment variable present, it must be Heroku
+if 'DATABASE_URL' in os.environ:
+    # replace default with parsed value
+    DATABASES['default'] = dj_database_url.config(ssl_require=True)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
