@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import django_heroku
 import dj_database_url
 from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv('.env'))
@@ -91,11 +90,9 @@ WSGI_APPLICATION = 'StockMarketApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {}
-# if environment variable present, it must be Heroku
-# replace default with parsed value
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-
+DATABASES = {
+    'default': os.environ['DATABASE_URL']
+}
 
 
 # Password validation
@@ -135,7 +132,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'Stocks/static/')
 STATIC_URL = '/static/'
-
-
-# Configure Django App for Heroku.
-django_heroku.settings(locals())
