@@ -94,10 +94,8 @@ WSGI_APPLICATION = 'StockMarketApp.wsgi.application'
 DATABASES = {}
 # if environment variable present, it must be Heroku
 # replace default with parsed value
-try:
-    DATABASES['default'] = dj_database_url.config(ssl_require=True)
-except:
-    DATABASES['default'] = os.environ['DATABASE_URL']
+DATABASES['default'] = dj_database_url.config()
+
 
 
 # Password validation
